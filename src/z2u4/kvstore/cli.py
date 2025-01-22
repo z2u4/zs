@@ -1,4 +1,5 @@
 
+import json
 import click
 from . import kvstore
 
@@ -17,4 +18,21 @@ def get(key):
 @click.argument("value", type=str)
 def set(key, value):
     kvstore[key] = value
+
+@cli.command()
+def reset():
+    kvstore.clear()
+    click.echo("KVStore reset")
+
+@cli.command()
+@click.argument("file", type=click.Path())
+def export(file):
+    with open(file, "w") as f:
+        json.dump(kvstore, f)
+    click.echo("KVStore exported")
+
+
+@cli.command()
+def keys():
+    click.echo(kvstore.keys())
 
