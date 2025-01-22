@@ -1,6 +1,6 @@
 [project]
 name = "zs"
-version = "0.1.0"
+version = "0.1.1"
 description = "Personal Shell"
 authors = [
     { name = "ZackaryW", email = "36378555+ZackaryW@users.noreply.github.com" }
