@@ -24,7 +24,9 @@ requests==2.32.3
     # via zs
 tabulate==0.9.0
     # via zs
+toml==0.10.2
+    # via zs
 urllib3==2.3.0
     # via requests
-zuu @ git+https://github.com/z2u4/py_zuu.git@3e5b1124d16cf7c2ed6f6d46e4bd69d0105bc43d
+zuu @ git+https://github.com/z2u4/py_zuu.git@316fcc65f4697599e01e1c60e3bb484f3b357282
     # via zs
