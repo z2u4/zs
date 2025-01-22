@@ -16,5 +16,8 @@ def parse_document(document: str, store : dict = kvstore) -> dict:
         value = store.get(key, None)
         if value is None:
             raise ValueError(f"Key {key} not found in store")
+        document = re.sub(r'^//<\$@' + re.escape(key) + '>', f'<$@{key}>', document, flags=re.MULTILINE)
+        document = re.sub(r'^#<\$@' + re.escape(key) + '>', f'<$@{key}>', document, flags=re.MULTILINE)
         document = document.replace(f'<$@{key}>', value)
+        
     return document
