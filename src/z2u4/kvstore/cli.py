@@ -10,8 +10,7 @@ def cli():
 @cli.command()
 @click.argument("key", type=str)
 def get(key):
-    if key in kvstore:
-        click.echo(kvstore[key])
+    click.echo(kvstore[key])
 
 @cli.command()
 @click.argument("key", type=str)

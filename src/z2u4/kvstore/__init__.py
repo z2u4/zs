@@ -15,7 +15,7 @@ class _Kvstore:
             snippet = snippet[0]
         if snippet is None:
             return None
-        return snippet.content[0]['value']
+        return snippet["content"][0]['value']
     
     def set(self, key : str, value : str):
         snippet = self.get(key)
@@ -23,7 +23,7 @@ class _Kvstore:
             snippet = MasscodeApi.create_snippet(
                 name=key,
                 content=[{
-                    "language" : "text",
+                    "language" : "plain_text",
                     "value" : value,
                     "label" : "main"
                 }],
@@ -42,6 +42,8 @@ class _Kvstore:
     def __setitem__(self, key : str, value : str):
         return self.set(key, value)
     
+    def keys(self):
+        return [snippet["name"] for snippet in MasscodeApi.snippets()]
 
 kvstore = _Kvstore()
 
@@ -49,13 +51,10 @@ kvstore = _Kvstore()
 def parse_document(document: str) -> dict:
     pattern = r'<\$@(\w+)>'
     matches = re.findall(pattern, document)
-    allsnippets : typing.List[Models.Snippet] = MasscodeApi.snippets()
     
     for match in matches:
         key = match
-        snippet = next((s for s in allsnippets if s["name"] == key), None)
-        if snippet is None:
-            snippet = next((s for s in allsnippets if key in s["name"]), None)
+        snippet = kvstore.get(key)
         
         if snippet is None:
             raise ValueError(f"Key {key} not found in store")
