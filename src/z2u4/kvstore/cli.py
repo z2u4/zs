@@ -15,8 +15,11 @@ def get(key):
 
 @cli.command()
 @click.argument("key", type=str)
-@click.argument("value", type=str)
+@click.argument("value", type=str, required=False)
 def set(key, value):
+    if value is None:
+        from tkinter import Tk
+        value = Tk().clipboard_get()
     kvstore[key] = value
 
 @cli.command()
@@ -35,4 +38,3 @@ def export(file):
 @cli.command()
 def keys():
     click.echo(kvstore.keys())
-
