@@ -36,6 +36,15 @@ class _Kvstore:
             MasscodeApi.update_snippet(snippet)
         return snippet
 
+    def __getitem__(self, key : str):
+        return self.get(key)
+    
+    def __setitem__(self, key : str, value : str):
+        return self.set(key, value)
+    
+
+kvstore = _Kvstore()
+
 
 def parse_document(document: str) -> dict:
     pattern = r'<\$@(\w+)>'
