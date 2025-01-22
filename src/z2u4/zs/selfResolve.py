@@ -106,7 +106,6 @@ def gather_installed_shells_from_usrpath():
         path = Cacher.get_path(id)
         res = get_shell_path(path)  
         if res:
-            install_dependencies(path)
             cli_path, mod_name = res
             filemod = import_file(cli_path, mod_name)
             shells[name] = filemod

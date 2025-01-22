@@ -2,7 +2,7 @@ import datetime
 import click
 from tabulate import tabulate
 
-from z2u4.zs.selfResolve import USRPATH_CONFIG
+from z2u4.zs.selfResolve import USRPATH_CONFIG, install_dependencies
 
 
 fts = lambda x: datetime.datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S")  # noqa
@@ -39,6 +39,8 @@ def add(url):
     if not shelltest:
         click.echo(f"No shell found for {url}")
         return
+
+    install_dependencies(path)
 
     USRPATH_CONFIG["shells"][item["meta"]["repo"]] = id
     USRPATH_CONFIG._save()
