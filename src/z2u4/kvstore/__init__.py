@@ -60,6 +60,6 @@ def parse_document(document: str) -> dict:
             raise ValueError(f"Key {key} not found in store")
         document = re.sub(r'^//<\$@' + re.escape(key) + '>', f'<$@{key}>', document, flags=re.MULTILINE)
         document = re.sub(r'^#<\$@' + re.escape(key) + '>', f'<$@{key}>', document, flags=re.MULTILINE)
-        document = document.replace(f'<$@{key}>', snippet["content"][0]['value'])
+        document = document.replace(f'<$@{key}>', snippet)
         
     return document
